@@ -13,6 +13,7 @@ import java.util.List;
 public class ProductoResource {
     FachadaModelo fm= new FachadaModelo();
 
+    @CrossOrigin(origins = "*")
     @GetMapping
     public ResponseEntity<List<Producto>> getPedidos() {
         List<Producto> prods = fm.getProductos();
@@ -23,6 +24,7 @@ public class ProductoResource {
         }
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/{id}")
     public ResponseEntity<Producto> getPedidoID(@PathVariable("id") Integer id) {
         Producto p = fm.getProductoById(id);
@@ -33,12 +35,14 @@ public class ProductoResource {
         }
     }
 
+    @CrossOrigin(origins = "*")
     @PostMapping
     public ResponseEntity<Producto> addProducto(@RequestBody Producto Producto){
         Producto c = fm.addProducto(Producto);
         return ResponseEntity.status(201).body(c);
     }
 
+    @CrossOrigin(origins = "*")
     @DeleteMapping("/{id}")
     public ResponseEntity<Producto> deleteProducto(@PathVariable("id") int id) {
         Producto c = fm.getProductoById(id);
@@ -50,6 +54,7 @@ public class ProductoResource {
         }
     }
 
+    @CrossOrigin(origins = "*")
     @PutMapping
     public ResponseEntity<Producto> updateProducto(@RequestBody Producto Producto) {
         Producto c = fm.getProductoById(Producto.getId());
