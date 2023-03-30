@@ -3,6 +3,7 @@ package com.ws;
 import com.logica.FachadaModelo;
 import entidades.Producto;
 import entidades.Producto;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("productos")
+@CacheConfig(cacheNames = "")
 public class ProductoResource {
     FachadaModelo fm= new FachadaModelo();
 

@@ -2,6 +2,8 @@ package com.ws;
 
 import com.logica.FachadaModelo;
 import entidades.Pedido;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("pedidos")
+@CacheConfig(cacheNames = "")
 public class PedidoResource {
 	FachadaModelo fm= new FachadaModelo();
 
