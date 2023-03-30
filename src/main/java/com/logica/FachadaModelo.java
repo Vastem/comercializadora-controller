@@ -14,17 +14,19 @@ import modelos.ModeloProducto;
 import java.util.List;
 
 public class FachadaModelo {
-    ConexionBD conexion = new ConexionBD();
+    ConexionBD conexionPedido = new ConexionBD();
+    ConexionBD conexionCliente = new ConexionBD();
+    ConexionBD conexionProducto = new ConexionBD();
     IModeloPedido mpedido;
     IModeloCliente mcliente;
     IModeloProducto mproducto;
 
     public FachadaModelo() {
-        this.mpedido = new ModeloPedido(conexion);
-        this.mcliente = new ModeloCliente(conexion);
-        this.mproducto = new ModeloProducto(conexion);
-    }
-
+        this.mpedido = new ModeloPedido(conexionPedido);
+        this.mcliente = new ModeloCliente(conexionCliente);
+        this.mproducto = new ModeloProducto(conexionProducto);
+    } 
+ 
     //Pedidos
     public Pedido getPedidoById(int i) {
         return mpedido.consultar(i);

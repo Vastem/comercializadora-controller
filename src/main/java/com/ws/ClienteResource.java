@@ -11,7 +11,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("clientes")
-@CacheConfig(cacheNames = "")
 public class ClienteResource {
     FachadaModelo fm= new FachadaModelo();
 
@@ -63,7 +62,7 @@ public class ClienteResource {
         if (c == null) {
             return ResponseEntity.notFound().build(); // devuelve 404 Not Found
         } else {
-            fm.updateCliente(c);
+            fm.updateCliente(cliente);
             return ResponseEntity.noContent().build(); //
         }
     }

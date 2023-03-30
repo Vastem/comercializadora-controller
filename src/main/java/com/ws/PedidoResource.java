@@ -11,7 +11,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("pedidos")
-@CacheConfig(cacheNames = "")
 public class PedidoResource {
 	FachadaModelo fm= new FachadaModelo();
 
