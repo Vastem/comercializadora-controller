@@ -2,11 +2,8 @@ package com.ws;
 
 import com.logica.FachadaModelo;
 import entidades.Cliente;
-import entidades.Pedido;
-import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
