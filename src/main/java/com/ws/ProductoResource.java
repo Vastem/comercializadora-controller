@@ -16,7 +16,7 @@ public class ProductoResource {
 
     @CrossOrigin(origins = "*")
     @GetMapping
-    public ResponseEntity<List<Producto>> getPedidos() {
+    public ResponseEntity<List<Producto>> getProductos() {
         List<Producto> prods = fm.getProductos();
         if (prods == null) {
             return ResponseEntity.notFound().build(); // devuelve 404 Not Found
@@ -27,7 +27,7 @@ public class ProductoResource {
 
     @CrossOrigin(origins = "*")
     @GetMapping("/{id}")
-    public ResponseEntity<Producto> getPedidoID(@PathVariable("id") Integer id) {
+    public ResponseEntity<Producto> getProductoID(@PathVariable("id") Integer id) {
         Producto p = fm.getProductoById(id);
         if (p == null) {
             return ResponseEntity.notFound().build(); // devuelve 404 Not Found

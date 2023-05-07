@@ -2,64 +2,66 @@ package com.ws;
 
 import com.logica.FachadaModelo;
 import entidades.Cliente;
+import entidades.Venta;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
-@RequestMapping("clientes")
-public class ClienteResource {
+@RequestMapping("ventas")
+public class VentaResource {
     FachadaModelo fm= new FachadaModelo();
 
     @CrossOrigin(origins = "*")
     @GetMapping
-    public ResponseEntity<List<Cliente>> getClientes() {
-        List<Cliente> clientes = fm.getClientes();
-        if (clientes == null) {
+    public ResponseEntity<List<Venta>> getVentas() {
+        List<Venta> ventas = fm.getVentas();
+        if (ventas == null) {
             return ResponseEntity.notFound().build(); // devuelve 404 Not Found
         } else {
-            return ResponseEntity.ok(clientes); // devuelve 200 OK y el objeto Pedido
+            return ResponseEntity.ok(ventas); // devuelve 200 OK y el objeto Pedido
         }
     }
 
     @CrossOrigin(origins = "*")
     @GetMapping("/{id}")
-    public ResponseEntity<Cliente> getClienteID(@PathVariable("id") Integer id) {
-        Cliente c = fm.getClienteById(id);
-        if (c == null) {
+    public ResponseEntity<Venta> getVentaID(@PathVariable("id") Integer id) {
+        Venta v = fm.getVentaById(id);
+        if (v == null) {
             return ResponseEntity.notFound().build(); // devuelve 404 Not Found
         } else {
-            return ResponseEntity.ok(c); // devuelve 200 OK y el objeto Pedido
+            return ResponseEntity.ok(v); // devuelve 200 OK y el objeto Pedido
         }
     }
 
     @CrossOrigin(origins = "*")
     @PostMapping
-    public ResponseEntity<Cliente> addCliente(@RequestBody Cliente cliente){
-        Cliente c = fm.addCliente(cliente);
-        return ResponseEntity.status(201).body(c);
+    public ResponseEntity<Venta> addVenta(@RequestBody Venta venta){
+        Venta v = fm.addVenta(venta);
+        return ResponseEntity.status(201).body(v);
     }
 
     @CrossOrigin(origins = "*")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Cliente> deleteCliente(@PathVariable("id") int id) {
-        Cliente c = fm.getClienteById(id);
-        if (c == null) {
+    public ResponseEntity<Venta> deleteVenta(@PathVariable("id") int id) {
+        Venta v = fm.getVentaById(id);
+        if (v == null) {
             return ResponseEntity.notFound().build(); // devuelve 404 Not Found
         } else {
-            fm.deleteCliente(c);
+            fm.deleteVenta(v);
             return ResponseEntity.noContent().build(); //
         }
     }
 
     @CrossOrigin(origins = "*")
     @PutMapping
-    public ResponseEntity<Cliente> updateCliente(@RequestBody Cliente cliente) {
-        Cliente c = fm.getClienteById(cliente.getId());
-        if (c == null) {
+    public ResponseEntity<Venta> updateVenta(@RequestBody Venta venta) {
+        Venta v = fm.getVentaById(venta.getId());
+        if (v == null) {
             return ResponseEntity.notFound().build(); // devuelve 404 Not Found
         } else {
-            fm.updateCliente(cliente);
+            fm.updateVenta(venta);
             return ResponseEntity.noContent().build(); //
         }
     }
