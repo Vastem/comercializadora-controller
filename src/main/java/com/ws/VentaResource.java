@@ -38,7 +38,12 @@ public class VentaResource {
     @CrossOrigin(origins = "*")
     @PostMapping
     public ResponseEntity<Venta> addVenta(@RequestBody Venta venta){
+        System.out.println(venta);
+
         Venta v = fm.addVenta(venta);
+        if(v == null ){
+            return ResponseEntity.ok().body(null);
+        }
         return ResponseEntity.status(201).body(v);
     }
 

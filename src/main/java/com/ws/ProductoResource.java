@@ -57,12 +57,12 @@ public class ProductoResource {
 
     @CrossOrigin(origins = "*")
     @PutMapping
-    public ResponseEntity<Producto> updateProducto(@RequestBody Producto Producto) {
-        Producto c = fm.getProductoById(Producto.getId());
+    public ResponseEntity<Producto> updateProducto(@RequestBody Producto producto) {
+        Producto c = fm.getProductoById(producto.getId());
         if (c == null) {
             return ResponseEntity.notFound().build(); // devuelve 404 Not Found
         } else {
-            fm.updateProducto(c);
+            fm.updateProducto(producto);
             return ResponseEntity.noContent().build(); //
         }
     }
