@@ -39,8 +39,12 @@ public class ProductoResource {
     @CrossOrigin(origins = "*")
     @PostMapping
     public ResponseEntity<Producto> addProducto(@RequestBody Producto Producto){
-        Producto c = fm.addProducto(Producto);
-        return ResponseEntity.status(201).body(c);
+        try {
+            Producto c = fm.addProducto(Producto);
+            return ResponseEntity.status(201).body(c);
+        }catch (Exception e){
+            return ResponseEntity.status(400).build();
+        }
     }
 
     @CrossOrigin(origins = "*")
@@ -49,9 +53,12 @@ public class ProductoResource {
         Producto c = fm.getProductoById(id);
         if (c == null) {
             return ResponseEntity.notFound().build(); // devuelve 404 Not Found
-        } else {
+        }
+        try {
             fm.deleteProducto(c);
             return ResponseEntity.noContent().build(); //
+        }catch (Exception e){
+            return ResponseEntity.badRequest().build(); //
         }
     }
 
@@ -61,9 +68,13 @@ public class ProductoResource {
         Producto c = fm.getProductoById(producto.getId());
         if (c == null) {
             return ResponseEntity.notFound().build(); // devuelve 404 Not Found
-        } else {
+        }
+        try {
             fm.updateProducto(producto);
             return ResponseEntity.noContent().build(); //
+        }catch (Exception e){
+            return ResponseEntity.badRequest().build(); //
+
         }
     }
 }

@@ -38,13 +38,12 @@ public class VentaResource {
     @CrossOrigin(origins = "*")
     @PostMapping
     public ResponseEntity<Venta> addVenta(@RequestBody Venta venta){
-        System.out.println(venta);
-
-        Venta v = fm.addVenta(venta);
-        if(v == null ){
-            return ResponseEntity.ok().body(null);
+        try {
+            Venta v = fm.addVenta(venta);
+            return ResponseEntity.status(201).body(v);
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(null);
         }
-        return ResponseEntity.status(201).body(v);
     }
 
     @CrossOrigin(origins = "*")
@@ -53,9 +52,12 @@ public class VentaResource {
         Venta v = fm.getVentaById(id);
         if (v == null) {
             return ResponseEntity.notFound().build(); // devuelve 404 Not Found
-        } else {
+        }
+        try {
             fm.deleteVenta(v);
             return ResponseEntity.noContent().build(); //
+        }catch (Exception e){
+            return ResponseEntity.badRequest().build(); //
         }
     }
 
@@ -65,9 +67,12 @@ public class VentaResource {
         Venta v = fm.getVentaById(venta.getId());
         if (v == null) {
             return ResponseEntity.notFound().build(); // devuelve 404 Not Found
-        } else {
+        }
+        try {
             fm.updateVenta(venta);
             return ResponseEntity.noContent().build(); //
+        }catch (Exception e){
+            return ResponseEntity.badRequest().build();
         }
     }
 

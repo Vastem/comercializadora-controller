@@ -36,8 +36,14 @@ public class ClienteResource {
     @CrossOrigin(origins = "*")
     @PostMapping
     public ResponseEntity<Cliente> addCliente(@RequestBody Cliente cliente){
-        Cliente c = fm.addCliente(cliente);
-        return ResponseEntity.status(201).body(c);
+        int response = 201;
+        Cliente c = null;
+        try {
+            c = fm.addCliente(cliente);
+        }catch (Exception e){
+            response = 400;
+        }
+        return ResponseEntity.status(response).body(c);
     }
 
     @CrossOrigin(origins = "*")
@@ -46,9 +52,13 @@ public class ClienteResource {
         Cliente c = fm.getClienteById(id);
         if (c == null) {
             return ResponseEntity.notFound().build(); // devuelve 404 Not Found
-        } else {
+        }
+        try{
             fm.deleteCliente(c);
-            return ResponseEntity.noContent().build(); //
+            return ResponseEntity.noContent().build();
+        }
+        catch (Exception e){
+            return ResponseEntity.badRequest().build();
         }
     }
 
@@ -56,12 +66,18 @@ public class ClienteResource {
     @PutMapping
     public ResponseEntity<Cliente> updateCliente(@RequestBody Cliente cliente) {
         Cliente c = fm.getClienteById(cliente.getId());
+
         if (c == null) {
             return ResponseEntity.notFound().build(); // devuelve 404 Not Found
-        } else {
+        }
+
+        try{
             fm.updateCliente(cliente);
             return ResponseEntity.noContent().build(); //
+        }catch (Exception e){
+            return ResponseEntity.badRequest().build();
         }
     }
+
 
 }

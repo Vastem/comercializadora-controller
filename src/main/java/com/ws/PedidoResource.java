@@ -39,8 +39,12 @@ public class PedidoResource {
 	@CrossOrigin(origins = "*")
 	@PostMapping
 	public ResponseEntity<Pedido> addPedido(@RequestBody Pedido pedido){
-		Pedido p = fm.addPedido(pedido);
-		return ResponseEntity.status(201).body(p);
+		try {
+			Pedido p = fm.addPedido(pedido);
+			return ResponseEntity.status(201).body(p);
+		}catch (Exception e){
+			return ResponseEntity.status(400).build();
+		}
 	}
 
 	@CrossOrigin(origins = "*")
@@ -49,9 +53,12 @@ public class PedidoResource {
 		Pedido p = fm.getPedidoById(id);
 		if (p == null) {
 			return ResponseEntity.notFound().build(); // devuelve 404 Not Found
-		} else {
+		}
+		try {
 			fm.deletePedido(p);
 			return ResponseEntity.noContent().build(); //
+		}catch (Exception e){
+			return ResponseEntity.badRequest().build();
 		}
 	}
 
@@ -61,9 +68,12 @@ public class PedidoResource {
 		Pedido p = fm.getPedidoById(pedido.getId());
 		if (p == null) {
 			return ResponseEntity.notFound().build(); // devuelve 404 Not Found
-		} else {
+		}
+		try {
 			fm.updaterPedido(pedido);
 			return ResponseEntity.noContent().build(); //
+		}catch (Exception e){
+			return ResponseEntity.badRequest().build();
 		}
 	}
 
