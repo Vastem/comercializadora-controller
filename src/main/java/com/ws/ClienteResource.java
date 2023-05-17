@@ -54,7 +54,11 @@ public class ClienteResource {
             return ResponseEntity.notFound().build(); // devuelve 404 Not Found
         }
         try{
-            fm.deleteCliente(c);
+            Cliente cliente = fm.deleteCliente(c);
+            System.out.println(cliente);
+            if(cliente == null){
+                return ResponseEntity.badRequest().build();
+            }
             return ResponseEntity.noContent().build();
         }
         catch (Exception e){
