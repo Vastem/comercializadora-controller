@@ -40,7 +40,7 @@ public class FachadaModelo {
     public List<Pedido> getPedidos() {
         return mpedido.consultar();
     }
-    public void deletePedido(Pedido pedido) {
+    public void deletePedido(Pedido pedido) throws Exception {
         mpedido.eliminar(pedido);
     }
     public Pedido updaterPedido(Pedido pedido) {
